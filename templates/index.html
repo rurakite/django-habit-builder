@@ -1,0 +1,63 @@
+{% extends 'components/base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-white fixed-top"
+    data-bs-theme="light">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase text-black fw-bold fs-3"
+            href="{% url '' %}"><span><i
+                    class="bi bi-train-front-fill"></i></span><span>Habitrain</span></a>
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item ms-3">
+                    <a class="nav-link"
+                        href=#>Log Out</a>
+                </li>
+                {% else %}
+                <li class="nav-item ms-3">
+                    <a class="btn btn-outline-info d-none d-lg-block"
+                        href=#>Sign In</a>
+                    <a class="d-lg-none nav-link" type="button"
+                        href=#>Sign In</a>
+                </li>
+                <li class="nav-item ms-3">
+                    <a class="btn btn-outline-info d-none d-lg-block"
+                        href=#>Sign Up</a>
+                    <a class="d-lg-none nav-link" type="button"
+                        href=#>Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="bg-image d-flex align-items-center" style="
+    background-image: url('static/images/train.png');
+    background-size: cover;
+    height: 100vh;
+    background-position: 50% 50%;
+  ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h1 class="text-primary-emphasis">
+                    <i
+                        class="bi bi-train-front-fill"></i><strong>HABITRAIN</strong>
+                </h1>
+                <h2 class="text-primary-emphasis">Your Ticket to
+                    Positive Change!</h2>
+                <a class="btn btn-outline-primary btn-lg mt-4"
+                    href=#>HOP ON BOARD</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
