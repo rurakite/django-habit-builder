@@ -1,0 +1,51 @@
+{% extends 'components/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include 'components/home-nav.html' %}
+<div class="container-fluid bg-image" style="
+    background-image: url('static/images/train.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  ">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div
+                class="col-lg-10 col-xl-9 card flex-row mt-5 mb-5 bg-white">
+                <div class="card-body">
+                    <h4 class="title text-center mt-4">
+                        Login into account
+                    </h4>
+
+                    <form method="POST" autocomplete="off">
+                        {% csrf_token %}
+
+                        {{ form.username|as_crispy_field }}
+                        <br>
+                        {{ form.password|as_crispy_field }}
+
+                        <div class="row align-items-center mt-5">
+                            <div class="col-8">
+                                <input
+                                    class="btn btn-outline-primary btn-md"
+                                    type="submit" value="Submit" />
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">
+                                    Don't have an account?
+                                    <br>
+                                    <a class=""
+                                        href="{% url 'register' %}">Sign
+                                        Up</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

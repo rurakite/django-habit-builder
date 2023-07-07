@@ -17,20 +17,20 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item ms-3">
                     <a class="nav-link"
-                        href=#>Log Out</a>
+                        href="{% url 'user-logout' %}">Log Out</a>
                 </li>
                 {% else %}
                 <li class="nav-item ms-3">
                     <a class="btn btn-outline-info d-none d-lg-block"
-                        href=#>Sign In</a>
+                        href="{% url 'login' %}">Sign In</a>
                     <a class="d-lg-none nav-link" type="button"
-                        href=#>Sign In</a>
+                        href="{% url 'login' %}">Sign In</a>
                 </li>
                 <li class="nav-item ms-3">
                     <a class="btn btn-outline-info d-none d-lg-block"
-                        href=#>Sign Up</a>
+                        href="{% url 'register' %}">Sign Up</a>
                     <a class="d-lg-none nav-link" type="button"
-                        href=#>Sign Up</a>
+                        href="{% url 'register' %}">Sign Up</a>
                 </li>
                 {% endif %}
             </ul>
@@ -55,7 +55,7 @@
                 <h2 class="text-primary-emphasis">Your Ticket to
                     Positive Change!</h2>
                 <a class="btn btn-outline-primary btn-lg mt-4"
-                    href=#>HOP ON BOARD</a>
+                    href="{% url 'register' %}">HOP ON BOARD</a>
             </div>
         </div>
     </div>
