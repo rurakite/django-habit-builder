@@ -3,7 +3,9 @@
     --topNavbarHeight: 56px;
   }
   
-  
+  .weatherwidget-io {
+    border-radius: 7px;
+  }
   
   .table {
     margin-bottom: 0;
