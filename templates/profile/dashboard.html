@@ -1,0 +1,116 @@
+{% extends 'components/base.html' %}
+{% block content %}
+{% include 'components/dashboard-nav.html' %}
+
+<main class="mt-5 pt-4">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-md-4 mb-2">
+                <div class="card bg-dark text-white h-100">
+                    <div class="card-body">
+                        <marquee style="color: lime">
+                            “We cannot solve problems with the kind of thinking we employed
+                            when we came up with them.” — Albert Einstein
+                        </marquee>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mb-2">
+                <a
+                        class="weatherwidget-io"
+                        href="https://forecast7.com/en/53d35n6d26/dublin/"
+                        data-label_1="DUBLIN"
+                        data-label_2="WEATHER"
+                        data-icons="Climacons Animated"
+                        data-days="3"
+                        data-theme="dark"
+                        data-basecolor="#212529"
+                        data-accent="rgba(255, 255, 255, 0.07)"
+                        style="border-radius: 7px"
+                >
+                    DUBLIN WEATHER
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card bg-dark text-white">
+                    <div
+                            class="card-header d-flex justify-content-between align-items-center fw-bold fs-4"
+                            style="border-bottom: solid 0.5px white"
+                    >
+                        <h4 class="mb-0">{% now 'l' %}</h4>
+                        <h4 class="mb-0">Week {{ week }}</h4>
+                        <button
+                                data-hx-get="#"
+                                data-hx-target="#dialog"
+                                type="button"
+                                name="addHabit"
+                                class="btn btn-outline-success btn-sm"
+                        >
+                            <i class="bi bi-plus-lg fs-5"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive card" id="no-more-tables">
+                            <table class="table table-dark" id="habit-table">
+                                <thead>
+                                <tr class="align-items-center">
+                                    <th class="text-center">Habit</th>
+                                    <th>Type</th>
+
+                                    {% for week_date in week_dates %}
+                                    <th>
+                                        {{ week_date.day_of_week }}
+                                        <span class="text-muted font-italic">
+                                            {{ week_date.date|date:"M/d" }}
+                                        </span>
+                                    </th>
+                                    {% endfor %}
+
+                                    <th>Progress</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card bg-white text-white h-100">
+                    <div class="card-body py-5 text-center">what to put in here</div>
+                    <div class="card-footer d-flex"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card bg-dark text-white h-100">
+                    <div class="card-body py-5 text-center">Warning Card</div>
+                    <div class="card-footer d-flex"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card bg-white text-white h-100">
+                    <div class="card-body py-5 text-center">Primary Card</div>
+                    <div class="card-footer d-flex"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card bg-dark text-white h-100">
+                    <div class="card-body py-5 text-center">Success Card</div>
+                    <div class="card-footer d-flex"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

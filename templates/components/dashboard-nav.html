@@ -1,0 +1,145 @@
+<header>
+    <!--top navigation bar-->
+    <nav class="navbar navbar-expand bg-dark fixed-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a
+                    class="nav-link d-lg-none text-white"
+                    data-bs-toggle="offcanvas"
+                    href="#offcanvasExample"
+                    role="button"
+                    aria-controls="offcanvasExample"
+            >
+                <span class="me-2"><i class="bi bi-list fs-3"></i></span>
+            </a>
+
+            <a
+                    class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
+                    href="{% url 'dashboard' %}"
+            ><span><i class="bi bi-train-front-fill"></i></span
+            ><span> HabiTrain</span></a
+            >
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" role="button">
+                        <i class="bi bi-plus-square"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" role="button">
+                        <i class="bi bi-bell-fill"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                            class="nav-link dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            href="#"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                    ><i class="bi bi-person-square"></i
+                    ></a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href=#>Profile</a>
+                        <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">LogOut</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!--top navigation bar-->
+
+<!--offcanvas-->
+<nav>
+    <div
+            class="offcanvas offcanvas-start bg-dark"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+    >
+        <div class="offcanvas-body p-0 d-flex justify-content-center">
+            <nav class="navbar-dark">
+                <ul class="navbar-nav">
+                    <div class="d-flex flex-column align-items-center mt-3">
+                        <a class="" href=#>
+                            <img class="rounded-circle"
+                                 src="#"
+                                 alt="profile-image"
+                                 style="width: 80px;"
+                            >
+                        </a>
+
+                        <span>@{{ user.username }}</span>
+                    </div>
+                    <li class="my-4">
+                        <hr class="dropdown-divider bg-light"/>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                           class="nav-link px-3"
+                           hx-get="#"
+                           hx-target="#dialog"
+                           name="addHabit"
+                        >
+                            <span class="me-2"><i class="bi bi-clipboard-plus"></i></span>
+                            <span>Add Habit</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                            <span class="me-2"><i class="bi bi-check2-square"></i></span>
+                            <span>View Habits</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                            <span class="me-2"><i class="bi bi-folder"></i></span>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                            <span class="me-2"><i class="bi bi-calendar2-week"></i></span>
+                            <span>Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                            <span class="me-2"><i class="bi bi-graph-up"></i></span>
+                            <span>Progress</span>
+                        </a>
+                    </li>
+                    <li class="my-4">
+                        <hr class="dropdown-divider bg-light"/>
+                    </li>
+                    <li>
+                        <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+                            <i class="bi bi-folder"></i> Categories
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                  <span class="me-2"
+                  ><i class="bi bi-clipboard2-pulse"></i
+                  ></span>
+                            <span>Health</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-3">
+                            <span class="me-2"><i class="bi bi-cup-straw"></i></span>
+                            <span>Productivity</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!--offcanvas-->
+</nav>
