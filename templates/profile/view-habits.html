@@ -10,8 +10,8 @@
             <div class="col-lg-4 col-md-3 mt-3"
                 id="habit-{{ habit.pk }}">
                 <div
-                    class="card bg-dark text-warning">
-                    <h5 class="card-header text-center">{{ habit.title }}</h5>
+                    class="card bg-dark text-light">
+                    <h5 class="card-header text-center">{{ habit.uppercase_title }}</h5>
                     <div class="card-body py-5 text-center">
                         {% if habit.description %}
                         <p class="card-text">{{ habit.description }}
@@ -21,7 +21,7 @@
                         {% endif %}
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <button class="btn btn-outline-warning btn-sm"
+                        <button class="btn btn-outline-info btn-sm"
                             hx-get="{% url 'edit-habit' pk=habit.pk %}"
                             hx-target="#dialog">
                             Edit

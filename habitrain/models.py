@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from cloudinary.models import CloudinaryField
 
 
 class Profile(models.Model):
@@ -9,7 +10,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=100, null=True, blank=True)
     occupation = models.CharField(max_length=100, null=True, blank=True)
     bio = models.TextField(max_length=500, null=True, blank=True)
-    profile_image = models.ImageField(default='avatar.jpg', upload_to='profile_images/', blank=True)
+    profile_image = CloudinaryField('image', default='avatar.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -37,6 +38,10 @@ class Habit(models.Model):
     category = models.CharField(choices=CATEGORIES, max_length=20, default=None)
     start_date = models.DateField(default=date.today)
     end_date = models.DateField(default=None)
+
+    @property
+    def uppercase_title(self):
+        return self.title.upper()
 
     def __str__(self):
         return self.title

@@ -13,7 +13,7 @@
            {% else %}table-light
            {% endif %}"
 >
-    <td data-title="Habit">{{ habit.title }}</td>
+    <td data-title="Habit">{{ habit.uppercase_title }}</td>
     <td data-title="Type">{{ habit.category }}</td>
     {% for week_date in week_dates %}
     <td data-title="{{ week_date.day_of_week }} | {{ week_date.date|date:'M/d' }}">

@@ -295,3 +295,6 @@ def view_dailies(request, habit_id):
         "dailies": dailies
     }
     return render(request, "profile/view-dailies.html", context=context)
+
+
+

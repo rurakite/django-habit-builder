@@ -1,95 +1,128 @@
-:root {
+:root
+{
     --offcanvas-width: 180px;
     --topNavbarHeight: 56px;
-  }
-  
-  .weatherwidget-io {
+}
+
+.hero {
+    background-image: url('/static/images/train.png');
+    background-size: cover;
+    height: 100vh;
+    background-position: 50% 50%;
+}
+
+.weatherwidget-io
+{
     border-radius: 7px;
-  }
-  
-  .custom-color {
+}
+
+.custom-color
+{
     color: #FF6B7A;
     background-color: #FFFFFF;
     border-radius: 10px;
 }
- 
-  .progress-bar {
-    transition: width 0.3s;
-  }
 
-  .table {
+.progress-bar
+{
+    transition: width 0.3s;
+}
+
+.table
+{
     margin-bottom: 0;
-  }
-  
-  .form-check {
+}
+
+.form-check
+{
     padding-left: 1.9em;
-  }
-  
-  .container-sm {
+}
+
+.container-sm
+{
     padding-left: calc(var(--bs-gutter-x) * 1.5);
-  }
-  
-  .form-layout {
+}
+
+.form-layout
+{
     border-radius: 10px;
     width: 500px;
-  }
-  
-  .offcanvas.offcanvas-start {
+}
+
+.offcanvas.offcanvas-start
+{
     width: var(--offcanvas-width);
-  }
-  
-  @media (min-width: 992px) {
-    body {
-      overflow: auto !important;
+}
+
+@media (min-width: 992px)
+{
+    body
+    {
+        overflow: auto !important;
     }
-    main {
-      margin-left: var(--offcanvas-width);
+
+    main
+    {
+        margin-left: var(--offcanvas-width);
     }
-  
-    .offcanvas-backdrop::before {
-      display: none;
+
+    .offcanvas-backdrop::before
+    {
+        display: none;
     }
-    .offcanvas.offcanvas-start {
-      -webkit-transform: none;
-      transform: none;
-      visibility: visible !important;
-      height: calc(100% - var(--topNavbarHeight));
-      top: var(--topNavbarHeight);
-      width: var(--offcanvas-width);
+
+    .offcanvas.offcanvas-start
+    {
+        -webkit-transform: none;
+        transform: none;
+        visibility: visible !important;
+        height: calc(100% - var(--topNavbarHeight));
+        top: var(--topNavbarHeight);
+        width: var(--offcanvas-width);
     }
-  }
-  
-  @media only screen and (max-width:800px) {
-    #no-habits-row td {
+}
+
+@media only screen and (max-width:800px)
+{
+    #no-habits-row td
+    {
         position: static !important;
         padding-left: 0 !important;
     }
-        #no-more-tables tbody,
-        #no-more-tables tr,
-        #no-more-tables td {
-             display: block;
-        }
-         #no-more-tables thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            #no-more-tables td {
-                position: relative;
-                padding-left: 50%;
-                border: none;
-                border-bottom: 1px solid #eee;
-            }
-            #no-more-tables td:before {
-                content: attr(data-title);
-                position: absolute;
-                left: 6px;
-                font-weight: bold;
-            }
-            #no-more-tables tr {
-                border-bottom: 1px solid black;
-            }
-            .no-habits-row td,
 
+    #no-more-tables tbody,
+    #no-more-tables tr,
+    #no-more-tables td
+    {
+        display: block;
     }
-  
+
+    #no-more-tables thead tr
+    {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    #no-more-tables td
+    {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    #no-more-tables td:before
+    {
+        content: attr(data-title);
+        position: absolute;
+        left: 6px;
+        font-weight: bold;
+    }
+
+    #no-more-tables tr
+    {
+        border-bottom: 1px solid black;
+    }
+
+}

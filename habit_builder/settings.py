@@ -27,9 +27,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-X_FRAME_OPTIONS = "SAMEORIGIN"
+
 
 
 ALLOWED_HOSTS = ['8000-rurakite-djangohabitbui-holjobz1krc.ws-eu101.gitpod.io', 'habitrain-923cabcbe865.herokuapp.com']
@@ -133,6 +133,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
