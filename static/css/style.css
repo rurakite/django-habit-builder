@@ -5,7 +5,7 @@
 }
 
 .hero {
-    background-image: url('/static/images/hero.jpg');
+    background-image: url('https://res.cloudinary.com/dwpxwxwyo/image/upload/v1689027970/static/images/hero.9b975111142e.jpg');
     background-size: cover;
     height: 100vh;
     background-position: 50% 50%;
