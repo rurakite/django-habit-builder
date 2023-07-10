@@ -20,7 +20,10 @@ from datetime import date, timedelta
 
 
 def home(request):
-    return render(request, 'index.html')
+    context = {
+        'user': request.user
+    }
+    return render(request, 'index.html', context=context)
 
 
 def register(request):

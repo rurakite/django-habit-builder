@@ -1,3 +1,5 @@
+{% load static %}
+{% if habits %}
 {% for habit in habits %}
 <tr id="habit-{{ habit.pk }}"
     class="{% if habit.category == 'HEALTH' %}table-success
@@ -30,7 +32,11 @@
                for="checkbox-{{ daily.id }}">
             <i class="bi bi-check-lg"></i>
         </label>
+
         {% endif %}
+        {% empty %}
+        <i class="bi bi-train-front"></i>
+
         {% endfor %}
 
     </td>
@@ -58,29 +64,34 @@
         </button>
     </td>
 </tr>
-
-
-<script>
-    $(document).ready(function() {
-  function updateHabitProgress(habitId) {
-    var completedCount = $('#habit-' + habitId + ' input[type="checkbox"]:checked').length;
-    var totalCount = $('#habit-' + habitId + ' input[type="checkbox"]').length;
-    var progress = (completedCount / totalCount) * 100;
-
-    $('#habit-' + habitId + ' .progress-bar').css('width', progress + '%');
-  }
-
-  // Event listener for checkbox change
-  $('input[type="checkbox"]').change(function() {
-    var habitId = $(this).closest('tr').attr('id').split('-')[1];
-    updateHabitProgress(habitId);
-  });
-
-  // Calculate and update progress for each habit on page load
-  $('[id^=habit-]').each(function() {
-    var habitId = $(this).attr('id').split('-')[1];
-    updateHabitProgress(habitId);
-  });
-});
-</script>
 {% endfor %}
+{% else %}
+
+<tr id="no-habits-row">
+
+    <td colspan="11" class="text-center">
+
+        <h4>
+            No habits at the moment.
+            <hr/>
+            Start your journey to a new life by adding a
+            <button
+                    data-hx-get="{% url 'create-habit' %}"
+                    data-hx-target="#dialog"
+                    type="button"
+                    name="addHabit"
+                    class="btn btn-outline-success"
+            >
+                NEW HABIT.
+            </button>
+
+        </h4>
+
+    </td>
+
+</tr>
+
+{% endif %}
+<script src="{% static 'js/script.js' %}"></script>
+
+

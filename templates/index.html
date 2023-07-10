@@ -53,10 +53,18 @@
                     <i
                         class="bi bi-train-front-fill"></i><strong>HABITRAIN</strong>
                 </h1>
-                <h2 class="text-primary-emphasis">Your Ticket to
-                    Positive Change!</h2>
-                <a class="btn btn-outline-primary btn-lg mt-4"
-                    href="{% url 'register' %}">HOP ON BOARD</a>
+                {% if user.is_authenticated %}
+                <h2 class="text-primary-emphasis">
+                    Hey <span class="custom-color">{{ user.username }}</span>
+                    <br/>
+                    Keep up the great work
+                    and continue your journey towards positive change!
+                </h2>
+                <a class="btn btn-outline-primary btn-lg mt-4" href="{% url 'dashboard' %}">DASHBOARD</a>
+                {% else %}
+                <h2 class="text-primary-emphasis">Your Ticket to Positive Change!</h2>
+                <a class="btn btn-outline-primary btn-lg mt-4" href="{% url 'register' %}">HOP ON BOARD</a>
+                {% endif %}
             </div>
         </div>
     </div>
