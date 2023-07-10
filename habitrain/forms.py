@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
 from django import forms
+from django.forms import DateInput
 from django.forms import ModelForm
 from .models import Habit, Daily, Profile
 
@@ -25,6 +26,8 @@ class CreateHabitForm(forms.ModelForm):
         exclude = ["user", ]
         widgets = {
             'category': forms.Select(attrs={'class': 'form-control'}),
+            'start_date': DateInput(attrs={'type': 'date'}),
+            'end_date': DateInput(attrs={'type': 'date'}),
         }
 
 
