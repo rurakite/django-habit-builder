@@ -136,8 +136,9 @@ def create_habit(request):
 
 @login_required(login_url="login")
 def habits_list(request):
-    days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
+    days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    current_user = request.user.id
     current_date = date.today()
     start_current_week = current_date - timedelta(days=current_date.weekday())
 
@@ -146,7 +147,7 @@ def habits_list(request):
         day = start_current_week + timedelta(days=i)
         week_dates.append({'day_of_week': days[i], 'date': day})
 
-    habits = Habit.objects.all()
+    habits = Habit.objects.all().filter(user=current_user)
     dailies = Daily.objects.all()
 
 
