@@ -27,11 +27,10 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-ALLOWED_HOSTS = ['8000-rurakite-djangohabitbui-69ovgruwcix.ws-eu101.gitpod.io', 'habitrain-923cabcbe865.herokuapp.com']
+ALLOWED_HOSTS = ['8000-rurakite-djangohabitbui-holjobz1krc.ws-eu101.gitpod.io', 'habitrain-923cabcbe865.herokuapp.com']
 
 
 # Application definition
@@ -63,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'habit_builder.urls'

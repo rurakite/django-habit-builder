@@ -7,6 +7,10 @@
     border-radius: 7px;
   }
   
+  .progress-bar {
+    transition: width 0.3s;
+  }
+
   .table {
     margin-bottom: 0;
   }

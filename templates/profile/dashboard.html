@@ -42,7 +42,7 @@
                         <h4 class="mb-0">{% now 'l' %}</h4>
                         <h4 class="mb-0">Week {{ week }}</h4>
                         <button
-                                data-hx-get="#"
+                                data-hx-get="{% url 'create-habit' %}"
                                 data-hx-target="#dialog"
                                 type="button"
                                 name="addHabit"
