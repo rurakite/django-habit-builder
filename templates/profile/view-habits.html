@@ -1,0 +1,41 @@
+{% extends 'components/base.html' %}
+
+{% block content %}
+
+{% include 'components/dashboard-nav.html' %}
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+        <div class="row">
+            {% for habit in habits %}
+            <div class="col-lg-4 col-md-3 mt-3"
+                id="habit-{{ habit.pk }}">
+                <div
+                    class="card bg-dark text-warning">
+                    <h5 class="card-header text-center">{{ habit.title }}</h5>
+                    <div class="card-body py-5 text-center">
+                        {% if habit.description %}
+                        <p class="card-text">{{ habit.description }}
+                        </p>
+                        {% else %}
+                        <p></p>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button class="btn btn-outline-warning btn-sm"
+                            hx-get="{% url 'edit-habit' pk=habit.pk %}"
+                            hx-target="#dialog">
+                            Edit
+                        </button>
+                        <button class="btn btn-outline-info btn-sm"
+                            hx-get="{% url 'view-dailies' habit_id=habit.id %}"
+                            hx-target="#dialog">
+                            Daily records
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,33 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Daily records for <strong>{{ habit }}</strong></h5>
+        <button type="button" class="btn-close"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for daily in dailies %}
+                <tr>
+                    <td>{{ daily.date }}</td>
+                    <td>
+                        {% if daily.done %}<i class="bi bi-check-circle-fill"></i>
+                        {% else %}<i class="bi bi-x-circle-fill"></i>{% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>

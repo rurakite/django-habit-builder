@@ -272,3 +272,25 @@ def daily_list(request):
 
     context = {"dailies": dailies, "habits": habits, "days": days, }
     return render(request, "profile/daily-list.html", context=context)
+
+
+@login_required(login_url="login")
+def view_habits(request):
+    current_user = request.user.id
+    habits = Habit.objects.all().filter(user=current_user)
+
+    context = {"habits": habits}
+    return render(request, "profile/view-habits.html", context=context)
+
+
+@login_required(login_url="login")
+def view_dailies(request, habit_id):
+    current_user = request.user.id
+    habit = get_object_or_404(Habit, pk=habit_id)
+    dailies = Daily.objects.filter(habit=habit, habit__user=current_user)
+
+    context = {
+        "habit": habit,
+        "dailies": dailies
+    }
+    return render(request, "profile/view-dailies.html", context=context)

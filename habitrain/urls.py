@@ -11,6 +11,8 @@ urlpatterns = [
     path('dashboard', views.dashboard, name="dashboard"),
     path('create-habit', views.create_habit, name="create-habit"),
     path('habits-list', views.habits_list, name="habits-list"),
+    path('view-habits', views.view_habits, name="view-habits"),
+    path('view-dailies/<int:habit_id>/', views.view_dailies, name="view-dailies"),
     path('edit-habit/<str:pk>', views.edit_habit, name="edit-habit"),
     path('delete-habit/<str:pk>', views.delete_habit, name="delete-habit"),path('user-profile', views.user_profile, name="user-profile"),
     path('user-profile-update', views.user_profile_update, name="user-profile-update"),
