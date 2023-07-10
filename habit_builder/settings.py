@@ -135,7 +135,18 @@ USE_L10N = True
 USE_TZ = True
 
 
+import cloudinary
+# Import the cloudinary.api for managing assets
+import cloudinary.api
+# Import the cloudinary.uploader for uploading assets
+import cloudinary.uploader
 
+cloudinary.config(
+    cloud_name="dwpxwxwyo",
+    api_key="516499951547175",
+    api_secret="PyU710sR7OXzoemfG508UEzz28I",
+    secure=True,
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
