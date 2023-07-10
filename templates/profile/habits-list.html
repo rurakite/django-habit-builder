@@ -1,4 +1,3 @@
-{% load static %}
 {% if habits %}
 {% for habit in habits %}
 <tr id="habit-{{ habit.pk }}"
@@ -92,6 +91,48 @@
 </tr>
 
 {% endif %}
-<script src="{% static 'js/script.js' %}"></script>
+<script >
+    $(document).ready(function()
+    {
+        function updateHabitProgress(habitId)
+        {
+            var completedCount = $('#habit-' + habitId +
+                ' input[type="checkbox"]:checked').length;
+            var totalCount = $('#habit-' + habitId +
+                ' input[type="checkbox"]').length;
+            var progress = (completedCount / totalCount) * 100;
+
+            $('#habit-' + habitId + ' .progress-bar').css('width',
+                progress + '%');
+        }
+
+        // Event listener for checkbox change
+        $('input[type="checkbox"]').change(function()
+        {
+            var habitId = $(this).closest('tr').attr('id')
+                .split('-')[1];
+            updateHabitProgress(habitId);
+        });
+
+        // Calculate and update progress for each habit on page load
+        $('[id^=habit-]').each(function()
+        {
+            var habitId = $(this).attr('id').split('-')[
+            1];
+            updateHabitProgress(habitId);
+        });
+
+        $("td").each(function()
+        {
+            if ($(this).html().trim() === "")
+            {
+                $(this).html(
+                    '<i class="bi bi-train-front fs-4"></i>'
+                    );
+            }
+        });
+    });
+
+</script>
 
 
