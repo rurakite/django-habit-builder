@@ -41,7 +41,7 @@
                     ></a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href=#>Profile</a>
+                        <a class="dropdown-item" href="{% url 'user-profile' %}">Profile</a>
                         <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">LogOut</a>
                     </div>
                 </li>
@@ -63,9 +63,9 @@
             <nav class="navbar-dark">
                 <ul class="navbar-nav">
                     <div class="d-flex flex-column align-items-center mt-3">
-                        <a class="" href=#>
+                        <a class="" href="{% url 'user-profile' %}">
                             <img class="rounded-circle"
-                                 src="#"
+                                 src="{{ user.profile.profile_image.url }}"
                                  alt="profile-image"
                                  style="width: 80px;"
                             >
@@ -78,9 +78,9 @@
                     </li>
 
                     <li>
-                        <a href="#"
+                        <a href="{% url 'create-habit' %}"
                            class="nav-link px-3"
-                           hx-get="#"
+                           hx-get="{% url 'create-habit' %}"
                            hx-target="#dialog"
                            name="addHabit"
                         >
@@ -134,7 +134,7 @@
                     <li>
                         <a href="#" class="nav-link px-3">
                             <span class="me-2"><i class="bi bi-cup-straw"></i></span>
-                            <span>Productivity</span>
+                            <span>Eating</span>
                         </a>
                     </li>
                 </ul>
