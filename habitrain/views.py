@@ -254,14 +254,14 @@ def view_dailies(request, habit_id):
 
 @login_required(login_url="login")
 def statistics(request):
-    selected_date = request.GET.get('date', str(date.today()))
-    selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date()
+    selected_date = request.GET.get('date')
+    parsed_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    dailies = Daily.objects.filter(date=parsed_date, habit__user=request.user)
     habits = Habit.objects.filter(user=request.user)
-    dailies = Daily.objects.filter(date=selected_date, habit__user=request.user)
-    total_habits = habits.count()
-    completed_habits = dailies.filter(done=True).count()
-    remained = total_habits - completed_habits
-    completion_rate = f"{round((completed_habits / total_habits) * 100 if total_habits > 0 else 0)}%"
+    total_dailies = dailies.count()
+    completed_dailies = dailies.filter(done=True).count()
+    remained = total_dailies - completed_dailies
+    completion_rate = f"{round((completed_dailies / total_dailies) * 100 if total_dailies > 0 else 0)}%"
 
     categories = [habit.category for habit in habits]
     category_counts = Counter(categories)
@@ -270,7 +270,7 @@ def statistics(request):
     context = {
         'habits': habits,
         'dailies': dailies,
-        'total_habits': total_habits,
+        'total_dailies': total_dailies,
         'category_counts': category_counts,
         'category_counts_values': category_counts_values,
         'remained': remained,

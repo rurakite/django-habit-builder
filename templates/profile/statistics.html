@@ -11,7 +11,7 @@
                         <div class="card-body p-4">
                             <h5 class="text-center text-white">PICK A DATE</h5>
                             <div class="text-center">
-                                <input type="text" id="date-picker" class="form-control" value="{{ selected_date }}">
+                                <input type="text" id="date-picker" class="form-control text-center p-0" value="{{ selected_date }}">
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                                     <div class="card bg-dark text-center">
                                         <br/>
                                         <h5 class="text-success font-weight-bolder mb-0">
-                                            {{ total_habits }}
+                                            {{ total_dailies }}
                                         </h5>
                                         <br/>
                                     </div>
@@ -66,14 +66,14 @@
                             <div class="row align-items-center">
                                 <div class="col-8">
                                     <div>
-                                        <h5 class="text-success-emphasis">REMAINING</h5>
+                                        <h5 class="text-success-emphasis">REMAINED</h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
                                     <div class="card bg-dark text-center">
                                         <br/>
                                         <h5 class="text-success font-weight-bolder mb-0">
-                                            {{ total_habits }}
+                                            {{ remained }}
                                         </h5>
                                         <br/>
                                     </div>
@@ -183,6 +183,10 @@
         flatpickr("#date-picker", {
             enableTime: false,
             dateFormat: "Y-m-d",
+            defaultDate: "{{ selected_date|date:'Y-m-d' }}",
+            onReady: function(selectedDates, dateStr, instance) {
+                instance.setDate(dateStr);
+            },
             onChange: function(selectedDates, dateStr, instance) {
                 const selectedDate = dateStr;
                 const url = '{% url "statistics" %}?date=' + selectedDate;
