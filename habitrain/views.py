@@ -255,17 +255,31 @@ def view_dailies(request, habit_id):
 @login_required(login_url="login")
 def statistics(request):
     selected_date = request.GET.get('date')
-    parsed_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-    dailies = Daily.objects.filter(date=parsed_date, habit__user=request.user)
-    habits = Habit.objects.filter(user=request.user)
-    total_dailies = dailies.count()
-    completed_dailies = dailies.filter(done=True).count()
-    remained = total_dailies - completed_dailies
-    completion_rate = f"{round((completed_dailies / total_dailies) * 100 if total_dailies > 0 else 0)}%"
+    parsed_date = None
+    if selected_date:
+        parsed_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
 
-    categories = [habit.category for habit in habits]
-    category_counts = Counter(categories)
-    category_counts_values = list(category_counts.values())
+    if parsed_date:
+        dailies = Daily.objects.filter(date=parsed_date, habit__user=request.user)
+        total_dailies = dailies.count()
+        completed_dailies = dailies.filter(done=True).count()
+        remained = total_dailies - completed_dailies
+        completion_rate = f"{round((completed_dailies / total_dailies) * 100) if total_dailies > 0 else 0}%"
+
+        habits = Habit.objects.filter(user=request.user, daily__date=parsed_date).distinct()
+        categories = [habit.category for habit in habits]
+        category_counts = Counter(categories)
+        category_counts_values = list(category_counts.values())
+
+    else:
+        dailies = []
+        total_dailies = 0
+        completed_dailies = 0
+        remained = 0
+        completion_rate = "0%"
+        habits = Habit.objects.filter(user=request.user)
+        category_counts = Counter()
+        category_counts_values = []
 
     context = {
         'habits': habits,
@@ -278,6 +292,7 @@ def statistics(request):
         'selected_date': selected_date,
     }
     return render(request, "profile/statistics.html", context=context)
+
 
 
 
