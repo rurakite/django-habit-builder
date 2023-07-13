@@ -20,9 +20,14 @@
             >
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" role="button">
+                    <a href="{% url 'create-habit' %}"
+                        class="nav-link"
+                        hx-get="{% url 'create-habit' %}"
+                        hx-target="#dialog"
+                        name="addHabit"
+                        >
                         <i class="bi bi-plus-square"></i>
-                    </a>
+                </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" role="button">
@@ -115,7 +120,7 @@
                             <span>Progress</span>
                         </a>
                     </li>
-                    <li class="my-4">
+                    <!-- <li class="my-4">
                         <hr class="dropdown-divider bg-light"/>
                     </li>
                     <li>
@@ -136,7 +141,7 @@
                             <span class="me-2"><i class="bi bi-cup-straw"></i></span>
                             <span>Eating</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </div>

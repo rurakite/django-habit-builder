@@ -17,7 +17,6 @@ def save_profile(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Habit)
-
 def create_or_update_daily_records(sender, instance, created, **kwargs):
     if created:
         create_daily_records(instance)
@@ -49,14 +48,20 @@ def update_daily_records(habit):
 
     # Check if the number of days has changed
     if num_days != daily_records.count():
-        # Delete the existing Daily instances
-        daily_records.delete()
+        # Generate new Daily instances for the added days
+        new_daily_records = [
+            Daily(date=habit.start_date + timedelta(days=i), habit=habit)
+            for i in range(num_days)
+            if not daily_records.filter(date=habit.start_date + timedelta(days=i)).exists()
+        ]
 
-        # Generate and create new Daily instances with the updated dates
-        create_daily_records(habit)
+        # Create the new Daily instances
+        Daily.objects.bulk_create(new_daily_records)
+
+        # Delete the Daily instances that are no longer needed
+        daily_records.exclude(date__range=(habit.start_date, habit.end_date)).delete()
     else:
         # Update the existing Daily instances with the updated dates
-        start_date = habit.start_date
         for i, daily_record in enumerate(daily_records):
-            daily_record.date = start_date + timedelta(days=i)
+            daily_record.date = habit.start_date + timedelta(days=i)
             daily_record.save()

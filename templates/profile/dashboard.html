@@ -40,7 +40,9 @@
                             class="card-header d-flex justify-content-between align-items-center fw-bold fs-4"
                             style="border-bottom: solid 0.5px white"
                     >
-                        <h4 class="mb-0">{% now 'l' %}</h4>
+                        <h4 class="mb-0">{% now 'l' %} <span class="text-muted font-italic fs-5">
+                            {% now "M/d" %}
+                        </span></h4>
                         <h4 class="mb-0">Week {{ week }}</h4>
                         <button
                                 data-hx-get="{% url 'create-habit' %}"
