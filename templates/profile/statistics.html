@@ -11,7 +11,7 @@
                         <div class="card-body p-4">
                             <h5 class="text-center text-white">PICK A DATE</h5>
                             <div class="text-center">
-                                <input type="text" id="date-picker" class="form-control">
+                                <input type="text" id="date-picker" class="form-control" value="{{ selected_date }}">
                             </div>
                         </div>
                     </div>
@@ -184,7 +184,7 @@
             enableTime: false,
             dateFormat: "Y-m-d",
             onChange: function(selectedDates, dateStr, instance) {
-                const selectedDate = instance.selectedDates[0].toISOString().split('T')[0];
+                const selectedDate = dateStr;
                 const url = '{% url "statistics" %}?date=' + selectedDate;
                 window.location.href = url;
             }
