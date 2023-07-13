@@ -1,0 +1,14 @@
+{% extends 'components/base.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">404</h1>
+        <p class="fs-3"> <span class="text-danger">Forbidden!</span> </p>
+        <p class="lead">
+            You don't have access to this page.
+          </p>
+        <a href="{% url 'home' %}" class="btn btn-outline-success">Go Home</a>
+    </div>
+</div>
+{% endblock %}
