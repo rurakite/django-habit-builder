@@ -19,4 +19,6 @@ urlpatterns = [
     path('user-logout', views.user_logout, name="user-logout"),
     path('daily/<str:daily_id>', views.mark_daily_done, name='mark_daily_done'),
     path('daily-list', views.daily_list, name="daily-list"),
+    path('statistics', views.statistics, name="statistics"),
+    path('view-habits-cards',views.view_habits_cards, name="view-habits-cards")
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

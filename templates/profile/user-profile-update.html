@@ -3,45 +3,43 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    {% include 'components/dashboard-nav.html' %}
 
-{% include 'components/dashboard-nav.html' %}
-
-<main class="mt-5 pt-3">
-    <div class="container-sm row my-3">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-dark text-white d-flex justify-content-between">
-                    <span class="fs-3">Profile Information</span>
-                </div>
-                <div class="row p-3 justify-content-center">
-                    <div class="col-md-8">
-                        <form method="POST" enctype="multipart/form-data">
-
-                            {% csrf_token %}
-
-                            {{ user_form.username|as_crispy_field }}
-                            <br />
-                            {{ user_form.email|as_crispy_field }}
-                            <br />
-                            {{ profile_form.age|as_crispy_field }}
-                            <br />
-                            {{ profile_form.occupation|as_crispy_field }}
-                            <br />
-                            {{ profile_form.location|as_crispy_field }}
-                            <br />
-                            {{ profile_form.profile_image|as_crispy_field }}
-                            <br />
-
-                            <input class="btn btn-outline-dark" type="submit" value="Update">
-                        </form>
+    <main class="mt-5 pt-3">
+        <div class="container-sm row my-3">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between">
+                        <span class="fs-3">Profile Information</span>
+                        <a class="nav-link mt-2" href="{% url 'user-profile' %}">
+                            GO BACK
+                            <i class="bi bi-arrow-left-square"></i>
+                        </a>
+                    </div>
+                    <div class="row p-3 justify-content-center">
+                        <div class="col-md-8">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ user_form.username|as_crispy_field }}
+                                <br />
+                                {{ user_form.email|as_crispy_field }}
+                                <br />
+                                {{ profile_form.age|as_crispy_field }}
+                                <br />
+                                {{ profile_form.occupation|as_crispy_field }}
+                                <br />
+                                {{ profile_form.location|as_crispy_field }}
+                                <br />
+                                {{ profile_form.profile_image|as_crispy_field }}
+                                <br />
+                                <input class="btn btn-outline-success" type="submit" value="Update">
+                                <a class="btn btn-outline-secondary" href="{% url 'user-profile' %}">Go Back</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-
+    </main>
 {% endblock %}
-
-

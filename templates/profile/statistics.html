@@ -1,0 +1,171 @@
+{% extends 'components/base.html' %}
+
+{% block content %}
+    {% include 'components/dashboard-nav.html' %}
+
+    <main class="mt-5 pt-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card bg-dark">
+                        <div class="card-body p-4">
+                            <h5 class="text-center text-white">PICK A DATE</h5>
+                            <div class="text-center">
+                                <input type="date" id="date-picker">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card bg-white shadow-lg">
+                        <div class="card-body p-3">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <div>
+                                        <h5 class="text-success-emphasis">TOTAL HABITS</h5>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div class="card bg-dark text-center">
+                                        <br/>
+                                        <h5 class="text-success font-weight-bolder mb-0">
+                                            {{ total_habits }}
+                                        </h5>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card bg-white shadow-lg">
+                        <div class="card-body p-3">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <div>
+                                        <h5 class="text-success-emphasis">COMPLETION</h5>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div class="card bg-dark text-center">
+                                        <br/>
+                                        <h5 class="text-success font-weight-bolder mb-0">
+                                            {{ completion_rate }}
+                                        </h5>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card bg-white shadow-lg">
+                        <div class="card-body p-3">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <div>
+                                        <h5 class="text-success-emphasis">REMAINING</h5>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div class="card bg-dark text-center">
+                                        <br/>
+                                        <h5 class="text-success font-weight-bolder mb-0">
+                                            {{ total_habits }}
+                                        </h5>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-7 mb-lg-0 mb-4">
+                    <div class="card"
+                         style="background-image: url('static/images/1108007_7713.jpg'); background-size: cover; opacity: 0.9;">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-lg-6 mt-3">
+                                    <h5 class="text-center text-success">Leverage Statistics for Success</h5>
+                                    <hr/>
+                                    <p class="mb-5 text-center text-white">
+                                        By analyzing your habits and their categories, you can gain valuable insights into different aspects of your life. Identifying which categories have the most habits or where there are fewer can provide a roadmap for personal growth and improvement.
+                                    </p>
+                                </div>
+                                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                                    <div>
+                                        <h5 class="text-warning text-center mb-4"><strong>Your Life Balance Wheel</strong></h5>
+                                        <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                                            <canvas id="myChart1" width="400" height="300"></canvas>
+                                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                            <script>
+                                                var ctx = document.getElementById('myChart1').getContext('2d');
+                                                var myChart1 = new Chart(ctx, {
+                                                    type: 'doughnut',
+                                                    data: {
+                                                        labels: [{% for category in category_counts %}'{{ category }}',{% endfor %}],
+                                                        datasets: [{
+                                                            data: [{% for count in category_counts_values %}'{{ count }}',{% endfor %}],
+                                                            backgroundColor: [
+                                                                'rgba(255,243,205,255)',
+                                                                'rgba(217,245,212,255)',
+                                                                'rgba(222,224,253,255)',
+                                                                'rgba(231,195,196,255)',
+                                                                'rgba(33,37,41,255)',
+                                                                'rgba(255, 159, 64, 1)'
+                                                            ],
+                                                            borderColor: [
+                                                                'rgba(255, 99, 132, 1)',
+                                                                'rgba(54, 162, 235, 1)',
+                                                                'rgba(255, 206, 86, 1)',
+                                                                'rgba(75, 192, 192, 1)',
+                                                                'rgba(153, 102, 255, 1)',
+                                                                'rgba(255, 159, 64, 1)'
+                                                            ],
+                                                            borderWidth: 1
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        plugins:{
+                                                            legend: {
+                                                                display: false
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card h-100 align-items-center p-3"
+                         style="background-image: url('static/images/16264060_rm314-bb-18.jpg'); background-size: cover; opacity: 1;">
+                        <div class="card-body p-3">
+                            <h5 class="text-success text-center mb-4">The Power of HABITRAIN</h5>
+                            <p class="text-white text-center">
+                                By monitoring and recording your progress, 
+                                habit tracker can be a powerful tool for individuals 
+                                to cultivate beneficial habits, eliminate harmful ones, 
+                                and enhance their overall well-being. By measuring and 
+                                tracking progress, HABITRAIN keep users accountable and 
+                                motivated to work harder towards achieving their goals.
+                            </p>
+                        </div>
+                        <a class="text-white me-auto" href="">
+                            Read More
+                            <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

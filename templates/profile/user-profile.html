@@ -1,63 +1,52 @@
 {% extends 'components/base.html' %}
 
 {% block content %}
+    {% include 'components/dashboard-nav.html' %}
 
-{% include 'components/dashboard-nav.html' %}
-
-<main class="mt-5 pt-3">
-    <div class="container-sm row my-3">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-dark text-white d-flex justify-content-between">
-                    <span class="fs-3">Profile Information</span>
-                    <a
-                            type="button"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-original-title="Edit Profile"
-                            href="{% url 'user-profile-update' %}"
-                    >
-                        <i class="bi bi-sliders fs-3 text-white"></i>
-                    </a>
-                </div>
-                <div class="row p-3">
-                    <div class="col-md-8">
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Name:</th>
-                                    <td>{{ user.username }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Email:</th>
-                                    <td>{{ user.email }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Age:</th>
-                                    <td>{{ user.profile.age }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Occupation:</th>
-                                    <td>{{ user.profile.occupation }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Location:</th>
-                                    <td>{{ user.profile.location }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <main class="mt-5 pt-3">
+        <div class="container-sm row my-3">
+            <div class="row-md-4">
+                <div class="card">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between">
+                        <span class="fs-3">Profile Information</span>
+                        <a class="nav-link mt-2" href="{% url 'user-profile-update' %}">
+                            EDIT
+                            <i class="bi bi-sliders text-white"></i>
+                        </a>
                     </div>
-                    <div class="col-md-4">
-                        <img class="img-thumbnail" src="{{ user.profile.profile_image.url }}" alt="profile-image">
+                    <div class="row p-3">
+                        <div class="col-md-8">
+                            <table class="table table-info table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Name:</th>
+                                        <td>{{ user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email:</th>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Age:</th>
+                                        <td>{{ user.profile.age }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Occupation:</th>
+                                        <td>{{ user.profile.occupation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Location:</th>
+                                        <td>{{ user.profile.location }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-thumbnail" src="{{ user.profile.profile_image.url }}" alt="profile-image">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-
-
+    </main>
 {% endblock %}
-
-

@@ -1,17 +1,13 @@
 {% load crispy_forms_tags %}
 
-
 <form hx-post="{{ request.path }}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title">Add a habit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-
         {% crispy form %}
-
         <br/>
-
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                 Cancel
@@ -19,5 +15,4 @@
             <button type="submit" class="btn btn-outline-success">Save</button>
         </div>
     </div>
-
 </form>

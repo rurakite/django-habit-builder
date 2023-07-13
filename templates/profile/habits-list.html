@@ -1,137 +1,105 @@
-
 {% if habits %}
-{% for habit in habits %}
-<tr id="habit-{{ habit.pk }}"
-    class="{% if habit.category == 'HEALTH' %}table-success
-           {% elif habit.category == 'FITNESS' %}table-info
-           {% elif habit.category == 'DESTRUCTIVE' %}table-danger
-           {% elif habit.category == 'PRODUCTIVITY' %}table-warning
-           {% elif habit.category == 'SELF-CARE' %}table-secondary
-           {% elif habit.category == 'FINANCE' %}table-light
-           {% elif habit.category == 'RELATIONSHIP' %}table-active
-           {% elif habit.category == 'MINDFULNESS' %}table-primary
-           {% else %}table-light
-           {% endif %}"
->
-    <td data-title="Habit">{{ habit.uppercase_title }}</td>
-    <td data-title="Type">{{ habit.category }}</td>
-    {% for week_date in week_dates %}
-    <td data-title="{{ week_date.day_of_week }} | {{ week_date.date|date:'M/d' }}">
-
-        {% for daily in dailies %}
-        {% if daily.habit.title == habit.title and daily.date == week_date.date%}
-
-
-        <input type="checkbox"
-               class="btn-check"
-               id="checkbox-{{ daily.id }}"
-               {% if daily.done %} checked {% endif %}
-               data-hx-post="{% url 'mark_daily_done' daily_id=daily.id %}"
+    {% for habit in habits %}
+        <tr id="habit-{{ habit.pk }}"
+            class="{% if habit.category == 'HEALTH' %}table-success
+                   {% elif habit.category == 'FITNESS' %}table-info
+                   {% elif habit.category == 'DESTRUCTIVE' %}table-danger
+                   {% elif habit.category == 'PRODUCTIVITY' %}table-warning
+                   {% elif habit.category == 'SELF-CARE' %}table-secondary
+                   {% elif habit.category == 'FINANCE' %}table-light
+                   {% elif habit.category == 'RELATIONSHIP' %}table-active
+                   {% elif habit.category == 'MINDFULNESS' %}table-primary
+                   {% else %}table-light
+                   {% endif %}"
         >
-        <label class="btn btn-outline-success btn-sm"
-               for="checkbox-{{ daily.id }}">
-            <i class="bi bi-check-lg"></i>
-        </label>
-
-        {% endif %}
-        {% empty %}
-        <i class="bi bi-train-front"></i>
-
-        {% endfor %}
-
-    </td>
+            <td data-title="Habit">{{ habit.uppercase_title }}</td>
+            <td data-title="Type">{{ habit.category }}</td>
+            {% for week_date in week_dates %}
+                <td data-title="{{ week_date.day_of_week }} | {{ week_date.date|date:'M/d' }}">
+                    {% for daily in dailies %}
+                        {% if daily.habit.title == habit.title and daily.date == week_date.date %}
+                            <input type="checkbox"
+                                   class="btn-check"
+                                   id="checkbox-{{ daily.id }}"
+                                   {% if daily.done %} checked {% endif %}
+                                   data-hx-post="{% url 'mark_daily_done' daily_id=daily.id %}"
+                            >
+                            <label class="btn btn-outline-success btn-sm"
+                                   for="checkbox-{{ daily.id }}">
+                                <i class="bi bi-check-lg"></i>
+                            </label>
+                        {% endif %}
+                    {% empty %}
+                        <i class="bi bi-train-front"></i>
+                    {% endfor %}
+                </td>
+            {% endfor %}
+            <td data-title="Progress" class="">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-dark"
+                         role="progressbar"
+                         aria-valuenow=""
+                         aria-valuemin="0"
+                         aria-valuemax=""
+                         style="will-change: transform; ">
+                    </div>
+                </div>
+            </td>
+            <td data-title="Edit" class="">
+                <button class="btn btn-outline-light btn-sm "
+                        data-hx-get="{% url 'edit-habit' pk=habit.pk %}"
+                        data-hx-target="#dialog">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+            </td>
+        </tr>
     {% endfor %}
-
-    <td data-title="Progress" class="">
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-dark"
-                 role="progressbar"
-                 aria-valuenow=""
-                 aria-valuemin="0"
-                 aria-valuemax=""
-                 style="will-change: transform; ">
-
-            </div>
-
-        </div>
-    </td>
-
-    <td data-title="Edit" class="">
-        <button class="btn btn-outline-light btn-sm "
-                data-hx-get="{% url 'edit-habit' pk=habit.pk %}"
-                data-hx-target="#dialog">
-            <i class="bi bi-pencil-square"></i>
-        </button>
-    </td>
-</tr>
-{% endfor %}
 {% else %}
-
-<tr id="no-habits-row">
-
-    <td colspan="11" class="text-center">
-        <br/>
-        <h4>
-            No habits at the moment.
-            <hr/>
-            Start your journey to a new life by adding a
-            <button
-                    data-hx-get="{% url 'create-habit' %}"
-                    data-hx-target="#dialog"
-                    type="button"
-                    name="addHabit"
-                    class="btn btn-outline-success"
-            >
-                NEW HABIT.
-            </button>
-
-        </h4>
-
-    </td>
-
-</tr>
-
+    <tr id="no-habits-row">
+        <td colspan="11" class="text-center">
+            <br/>
+            <h4>
+                No habits at the moment.
+                <hr/>
+                Start your journey to a new life by adding a
+                <button data-hx-get="{% url 'create-habit' %}"
+                        data-hx-target="#dialog"
+                        type="button"
+                        name="addHabit"
+                        class="btn btn-outline-success"
+                >
+                    NEW HABIT.
+                </button>
+            </h4>
+        </td>
+    </tr>
 {% endif %}
-<script >
-    $(document).ready(function()
-    {
-        function updateHabitProgress(habitId)
-        {
-            var completedCount = $('#habit-' + habitId +
-                ' input[type="checkbox"]:checked').length;
-            var totalCount = $('#habit-' + habitId +
-                ' input[type="checkbox"]').length;
+
+<script>
+    $(document).ready(function () {
+        function updateHabitProgress(habitId) {
+            var completedCount = $('#habit-' + habitId + ' input[type="checkbox"]:checked').length;
+            var totalCount = $('#habit-' + habitId + ' input[type="checkbox"]').length;
             var progress = (completedCount / totalCount) * 100;
-
-            $('#habit-' + habitId + ' .progress-bar').css('width',
-                progress + '%');
+            $('#habit-' + habitId + ' .progress-bar').css('width', progress + '%');
         }
-
+        
         // Event listener for checkbox change
-        $('input[type="checkbox"]').change(function()
-        {
-            var habitId = $(this).closest('tr').attr('id')
-                .split('-')[1];
+        $('input[type="checkbox"]').change(function () {
+            var habitId = $(this).closest('tr').attr('id').split('-')[1];
             updateHabitProgress(habitId);
         });
 
         // Calculate and update progress for each habit on page load
-        $('[id^=habit-]').each(function()
-        {
-            var habitId = $(this).attr('id').split('-')[
-            1];
+        $('[id^=habit-]').each(function () {
+            var habitId = $(this).attr('id').split('-')[1];
             updateHabitProgress(habitId);
         });
 
-        $("td").each(function()
-        {
-            if ($(this).html().trim() === "")
-            {
-                $(this).html(
-                    '&nbsp<i class="bi bi-train-front fs-4"></i>'
-                    );
+        $("td").each(function () {
+            if ($(this).html().trim() === "") {
+                $(this).html('&nbsp;<i class="bi bi-train-front fs-4"></i>');
             }
         });
     });
-
 </script>

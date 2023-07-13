@@ -1,0 +1,40 @@
+{% if habits %}
+    {% for habit in habits %}
+        <div class="col-lg-4 col-md-6 mt-3" id="habit-{{ habit.pk }}">
+            <div class="card bg-dark">
+                <h5 class="card-header text-center text-success">{{ habit.title }}</h5>
+                <div class="card-body py-5 text-center">
+                    {% if habit.description %}
+                        <p class="card-text text-light">{{ habit.description }}</p>
+                    {% else %}
+                        <p></p>
+                    {% endif %}
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a class="nav-link" type="button" hx-get="{% url 'edit-habit' pk=habit.pk %}" hx-target="#dialog">
+                        <i class="bi bi-gear fs-5 text-secondary"></i>
+                    </a>
+                    <button class="btn btn-outline-light btn-sm text-success-emphasis"
+                            hx-get="{% url 'view-dailies' habit_id=habit.id %}"
+                            hx-target="#dialog">
+                        Daily Records
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center text-success-emphasis mt-5">
+            <h3 class="text-dark">No habits created at the moment.</h3>
+            <p>Please add your new habit to get started!</p>
+            <button data-hx-get="{% url 'create-habit' %}"
+                    data-hx-target="#dialog"
+                    type="button"
+                    name="addHabit"
+                    class="btn btn-outline-success">
+                ADD HABIT.
+            </button>
+        </div>
+    </div>
+{% endif %}

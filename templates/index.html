@@ -1,37 +1,31 @@
 {% extends 'components/base.html' %}
-{% load cloudinary %}
+
 {% block content %}
-<nav class="navbar navbar-expand-lg bg-white fixed-top"
-    data-bs-theme="light">
+<nav class="navbar navbar-expand-lg bg-white fixed-top" data-bs-theme="light">
     <div class="container-fluid px-4">
-        <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase text-black fw-bold fs-3"
-            href="{% url '' %}"><span><i
-                    class="bi bi-train-front-fill"></i></span><span>Habitrain</span></a>
-        <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navbarToggler"
-            aria-controls="navbarToggler" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase text-black fw-bold fs-3" href="{% url '' %}">
+            <span><i class="bi bi-train-front-fill"></i></span>
+            <span>Habitrain</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
                 <li class="nav-item ms-3">
-                    <a class="nav-link"
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                         href="{% url 'user-logout' %}">Log Out</a>
                 </li>
                 {% else %}
                 <li class="nav-item ms-3">
-                    <a class="btn btn-outline-info d-none d-lg-block"
-                        href="{% url 'login' %}">Sign In</a>
-                    <a class="d-lg-none nav-link" type="button"
-                        href="{% url 'login' %}">Sign In</a>
+                    <a class="btn btn-outline-info d-none d-lg-block" href="{% url 'login' %}">Sign In</a>
+                    <a class="d-lg-none nav-link" type="button" href="{% url 'login' %}">Sign In</a>
                 </li>
                 <li class="nav-item ms-3">
-                    <a class="btn btn-outline-info d-none d-lg-block"
-                        href="{% url 'register' %}">Sign Up</a>
-                    <a class="d-lg-none nav-link" type="button"
-                        href="{% url 'register' %}">Sign Up</a>
+                    <a class="btn btn-outline-info d-none d-lg-block" href="{% url 'register' %}">Sign Up</a>
+                    <a class="d-lg-none nav-link" type="button" href="{% url 'register' %}">Sign Up</a>
                 </li>
                 {% endif %}
             </ul>
@@ -39,21 +33,19 @@
     </div>
 </nav>
 
-
 <div class="hero d-flex align-items-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center">
                 <h1 class="text-primary-emphasis">
-                    <i
-                        class="bi bi-train-front-fill"></i><strong>HABITRAIN</strong>
+                    <i class="bi bi-train-front-fill"></i>
+                    <strong>HABITRAIN</strong>
                 </h1>
                 {% if user.is_authenticated %}
                 <h2 class="text-primary-emphasis">
                     Hey <span class="text-black"><b>@{{ user.username }}</b></span>
-                    <br/>
-                    Keep up the great work
-                    and continue your journey towards positive change!
+                    <br>
+                    Keep up the great work and continue your journey towards positive change!
                 </h2>
                 <a class="btn btn-outline-primary btn-lg mt-4" href="{% url 'dashboard' %}">DASHBOARD</a>
                 {% else %}

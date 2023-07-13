@@ -1,54 +1,44 @@
 {% extends 'components/base.html' %}
 {% load crispy_forms_tags %}
+
 {% block content %}
-{% include 'components/home-nav.html' %}
-<div class="hero container-fluid bg-image d-flex" style="height: auto;">
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div
-                class="col-lg-10 col-xl-9 card flex-row bg-white mt-5 mb-5">
-                <div class="card-body">
-                    <h4 class="title text-center mt-4">
-                        Welcome to Habitrain!
-                    </h4>
-                    <p class="text-center">Create an account to unlock
-                        a world of motivation,
-                        progress tracking, and habit-building tools.
-                    </p>
-
-                    <form method="POST" autocomplete="off">
-                        {% csrf_token %}
-
-                        {{form.username|as_crispy_field}}
-                        <br>
-                        {{form.email|as_crispy_field}}
-                        <br>
-                        {{form.password1|as_crispy_field}}
-                        <br>
-                        {{form.password2|as_crispy_field}}
-
-                        <div class="row align-items-center mt-5">
-                            <div class="col-8">
-                                <input
-                                    class="btn btn-outline-primary btn-md"
-                                    type="submit" value="Submit" />
+    {% include 'components/home-nav.html' %}
+    <div class="hero container-fluid bg-image d-flex" style="height: auto;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-9 card flex-row bg-white mt-5 mb-5">
+                    <div class="card-body">
+                        <h4 class="title text-center mt-4">
+                            Welcome to Habitrain!
+                        </h4>
+                        <p class="text-center">
+                            Create an account to unlock a world of motivation, progress tracking, and habit-building tools.
+                        </p>
+                        <form method="POST" autocomplete="off">
+                            {% csrf_token %}
+                            {{ form.username|as_crispy_field }}
+                            <br>
+                            {{ form.email|as_crispy_field }}
+                            <br>
+                            {{ form.password1|as_crispy_field }}
+                            <br>
+                            {{ form.password2|as_crispy_field }}
+                            <div class="row align-items-center mt-5">
+                                <div class="col-8">
+                                    <input class="btn btn-outline-primary btn-md" type="submit" value="Submit" />
+                                </div>
+                                <div class="col-4">
+                                    <p class="card-text">
+                                        Already have an account?
+                                        <br>
+                                        <a class="" href="{% url 'login' %}">Sign In</a>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <p class="card-text">
-                                    Already have an account?
-                                    <br>
-                                    <a class=""
-                                        href="{% url 'login' %}">Sign
-                                        In</a>
-                                </p>
-                            </div>
-                        </div>
-                    </form>
-
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

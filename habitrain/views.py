@@ -15,6 +15,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from datetime import date, timedelta
+from collections import Counter
 
 
 
@@ -297,4 +298,35 @@ def view_dailies(request, habit_id):
     return render(request, "profile/view-dailies.html", context=context)
 
 
+@login_required(login_url="login")
+def statistics(request):
+    current_date = date.today()
+    current_user = request.user.id
+    habits = Habit.objects.all().filter(user=current_user)
+    dailies = Daily.objects.filter(date=current_date, habit__user=current_user)
+    total_habits = Habit.objects.all().filter(user=current_user).count()
+    completed_habits = dailies.filter(done=True).count()
+    completion_rate = str(round((completed_habits / total_habits) * 100 if total_habits > 0 else 0)) + '%'
 
+    categories = [habit.category for habit in habits]
+    category_counts = Counter(categories)
+    category_counts_values = list(category_counts.values())
+
+    context = {
+
+        'habits': habits,
+        'dailies': dailies,
+        'total_habits': total_habits,
+        'category_counts': category_counts,
+        'category_counts_values': category_counts_values,
+        'completion_rate': completion_rate,
+    }
+    return render(request, "profile/statistics.html", context)
+
+
+def view_habits_cards(request):
+    current_user = request.user.id
+    habits = Habit.objects.all().filter(user=current_user)
+
+    context = {"habits": habits}
+    return render(request, "profile/view-habits-cards.html", context=context)
