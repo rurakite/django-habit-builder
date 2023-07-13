@@ -22,7 +22,7 @@
                                    class="btn-check"
                                    id="checkbox-{{ daily.id }}"
                                    {% if daily.done %} checked {% endif %}
-                                   data-hx-post="{% url 'mark_daily_done' daily_id=daily.id %}"
+                                   data-hx-post="{% url 'mark-daily-done' daily_id=daily.id %}"
                             >
                             <label class="btn btn-outline-success btn-sm"
                                    for="checkbox-{{ daily.id }}">
