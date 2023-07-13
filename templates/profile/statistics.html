@@ -11,7 +11,7 @@
                         <div class="card-body p-4">
                             <h5 class="text-center text-white">PICK A DATE</h5>
                             <div class="text-center">
-                                <input type="date" id="date-picker" onchange="handleDatePickerChange()">
+                                <input type="text" id="date-picker" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                     <div class="card bg-dark text-center">
                                         <br/>
                                         <h5 class="text-success font-weight-bolder mb-0">
-                                            {{ remained }}
+                                            {{ total_habits }}
                                         </h5>
                                         <br/>
                                     </div>
@@ -170,19 +170,24 @@
             {% else %}
                 <!-- Display alert -->
                 <div class="alert alert-warning mt-4" role="alert">
-                    No records found for the selected date: {{ selected_date }}
+                    No records for the selected date: {{ selected_date }}
                     <br/>
-                    Please pick another one.
+                    Please pick another date.
                 </div>
             {% endif %}
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        function handleDatePickerChange() {
-            const selectedDate = document.getElementById('date-picker').value;
-            const url = '{% url "statistics" %}?date=' + selectedDate;
-            window.location.href = url;
-        }
+        flatpickr("#date-picker", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            onChange: function(selectedDates, dateStr, instance) {
+                const selectedDate = instance.selectedDates[0].toISOString().split('T')[0];
+                const url = '{% url "statistics" %}?date=' + selectedDate;
+                window.location.href = url;
+            }
+        });
     </script>
 {% endblock %}
