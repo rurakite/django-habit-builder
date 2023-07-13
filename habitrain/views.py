@@ -1,34 +1,23 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 import json
-from django.shortcuts import get_object_or_404
 from .models import Habit, Daily
-from .forms import (
-    CreateUserForm,
-    LoginForm,
-    UserUpdateForm,
-    ProfileUpdateForm,
-    CreateHabitForm,
-)
-from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login
+from .forms import CreateUserForm, LoginForm, UserUpdateForm, ProfileUpdateForm, CreateHabitForm
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from collections import Counter
 
 
-
-
 def home(request):
-    context = {
-        'user': request.user
-    }
+    context = {'user': request.user}
     return render(request, 'index.html', context=context)
 
 
 def register(request):
     form = CreateUserForm()
+
     if request.method == "POST":
         form = CreateUserForm(request.POST)
 
@@ -36,15 +25,12 @@ def register(request):
             form.save()
             return redirect("login")
 
-    context = {
-        "form": form
-    }
-
+    context = {"form": form}
     return render(request, "register.html", context=context)
 
 
-def login(request):
-    form = LoginForm
+def user_login(request):
+    form = LoginForm()
 
     if request.method == "POST":
         form = LoginForm(request, data=request.POST)
@@ -55,20 +41,17 @@ def login(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                auth.login(request, user)
-
+                login(request, user)
                 return redirect("dashboard")
-    context = {
-        "form": form
-    }
 
+    context = {"form": form}
     return render(request, "login.html", context=context)
 
 
+@login_required(login_url="login")
 def user_logout(request):
-    auth.logout(request)
-
-    return redirect("")
+    logout(request)
+    return redirect("home")
 
 
 @login_required(login_url="login")
@@ -79,11 +62,8 @@ def dashboard(request):
     start_current_week = current_date - timedelta(days=current_date.weekday())
     end_current_week = start_current_week + timedelta(days=6)
 
-    week_dates = []
-    for i in range(7):
-        day = start_current_week + timedelta(days=i)
-        week_dates.append({'day_of_week': days[i], 'date': day})
-    habits = Habit.objects.all()
+    week_dates = [{'day_of_week': days[i], 'date': start_current_week + timedelta(days=i)} for i in range(7)]
+    habits = Habit.objects.filter(user=request.user)
     dailies = Daily.objects.all()
 
     context = {
@@ -112,7 +92,7 @@ def create_habit(request):
                     headers={
                         'HX-Trigger': json.dumps({
                             "HabitListChanged": None,
-                            "showMessage": f"Sorry, the {title}is already in your list."
+                            "showMessage": f"Sorry, the {title} is already in your list."
                         })
                     }
                 )
@@ -129,35 +109,26 @@ def create_habit(request):
                 }
             )
 
-    context = {
-        "form": form
-    }
+    context = {"form": form}
     return render(request, "profile/create-habit.html", context=context)
 
 
 @login_required(login_url="login")
 def habits_list(request):
-
     days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     current_user = request.user.id
     current_date = date.today()
     start_current_week = current_date - timedelta(days=current_date.weekday())
 
-    week_dates = []
-    for i in range(7):
-        day = start_current_week + timedelta(days=i)
-        week_dates.append({'day_of_week': days[i], 'date': day})
-
-    habits = Habit.objects.all().filter(user=current_user)
+    week_dates = [{'day_of_week': days[i], 'date': start_current_week + timedelta(days=i)} for i in range(7)]
+    habits = Habit.objects.filter(user=current_user)
     dailies = Daily.objects.all()
-
 
     context = {
         'dailies': dailies,
         'habits': habits,
         'days': days,
         'week_dates': week_dates,
-
     }
     return render(request, "profile/habits-list.html", context=context)
 
@@ -166,6 +137,7 @@ def habits_list(request):
 def edit_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     form = CreateHabitForm(instance=habit)
+
     if request.method == "POST":
         form = CreateHabitForm(request.POST, instance=habit)
         if form.is_valid():
@@ -180,10 +152,7 @@ def edit_habit(request, pk):
                 }
             )
 
-    context = {
-        "form": form,
-        "habit": habit
-    }
+    context = {"form": form, "habit": habit}
     return render(request, "profile/edit-habit.html", context=context)
 
 
@@ -201,13 +170,7 @@ def delete_habit(request, pk):
                 })
             }
         )
-
-
-
-def user_logout(request):
-    auth.logout(request)
-
-    return redirect("")
+    return redirect("habits-list")
 
 
 @login_required(login_url="login")
@@ -219,8 +182,7 @@ def user_profile(request):
 def user_profile_update(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -229,10 +191,7 @@ def user_profile_update(request):
     user_form = UserUpdateForm(instance=request.user)
     profile_form = ProfileUpdateForm(instance=request.user.profile)
 
-    context = {
-        'user_form': user_form,
-        'profile_form': profile_form,
-    }
+    context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'profile/user-profile-update.html', context)
 
 
@@ -272,14 +231,13 @@ def daily_list(request):
     habits = Habit.objects.all()
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-    context = {"dailies": dailies, "habits": habits, "days": days, }
+    context = {"dailies": dailies, "habits": habits, "days": days}
     return render(request, "profile/daily-list.html", context=context)
 
 
 @login_required(login_url="login")
 def view_habits(request):
-    current_user = request.user.id
-    habits = Habit.objects.all().filter(user=current_user)
+    habits = Habit.objects.filter(user=request.user)
 
     context = {"habits": habits}
     return render(request, "profile/view-habits.html", context=context)
@@ -287,46 +245,44 @@ def view_habits(request):
 
 @login_required(login_url="login")
 def view_dailies(request, habit_id):
-    current_user = request.user.id
     habit = get_object_or_404(Habit, pk=habit_id)
-    dailies = Daily.objects.filter(habit=habit, habit__user=current_user)
+    dailies = Daily.objects.filter(habit=habit, habit__user=request.user)
 
-    context = {
-        "habit": habit,
-        "dailies": dailies
-    }
+    context = {"habit": habit, "dailies": dailies}
     return render(request, "profile/view-dailies.html", context=context)
 
 
 @login_required(login_url="login")
 def statistics(request):
-    current_date = date.today()
-    current_user = request.user.id
-    habits = Habit.objects.all().filter(user=current_user)
-    dailies = Daily.objects.filter(date=current_date, habit__user=current_user)
-    total_habits = Habit.objects.all().filter(user=current_user).count()
+    selected_date = request.GET.get('date', str(date.today()))
+    selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date()
+    habits = Habit.objects.filter(user=request.user)
+    dailies = Daily.objects.filter(date=selected_date, habit__user=request.user)
+    total_habits = habits.count()
     completed_habits = dailies.filter(done=True).count()
-    completion_rate = str(round((completed_habits / total_habits) * 100 if total_habits > 0 else 0)) + '%'
+    remained = total_habits - completed_habits
+    completion_rate = f"{round((completed_habits / total_habits) * 100 if total_habits > 0 else 0)}%"
 
     categories = [habit.category for habit in habits]
     category_counts = Counter(categories)
     category_counts_values = list(category_counts.values())
 
     context = {
-
         'habits': habits,
         'dailies': dailies,
         'total_habits': total_habits,
         'category_counts': category_counts,
         'category_counts_values': category_counts_values,
+        'remained': remained,
         'completion_rate': completion_rate,
+        'selected_date': selected_date,
     }
-    return render(request, "profile/statistics.html", context)
+    return render(request, "profile/statistics.html", context=context)
+
 
 
 def view_habits_cards(request):
-    current_user = request.user.id
-    habits = Habit.objects.all().filter(user=current_user)
+    habits = Habit.objects.filter(user=request.user)
 
     context = {"habits": habits}
     return render(request, "profile/view-habits-cards.html", context=context)
