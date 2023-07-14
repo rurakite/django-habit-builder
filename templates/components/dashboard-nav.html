@@ -37,7 +37,7 @@
                 <ul class="navbar-nav">
                     <div class="d-flex flex-column align-items-center mt-3">
                         <div>
-                            {% if user.profile.profile_image.image %}
+                            {% if user.profile.profile_image %}
                                 <img class="rounded-circle" src="{{ user.profile.profile_image.url }}"
                                 alt="profile-image" style="width: 80px; height: 80px;">
                             {% else %}
