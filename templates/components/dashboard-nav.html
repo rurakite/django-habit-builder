@@ -1,3 +1,5 @@
+{% load static %}
+
 <header>
     <!--top navigation bar-->
     <nav class="navbar navbar-expand bg-dark fixed-top" data-bs-theme="dark">
@@ -37,8 +39,13 @@
                 <ul class="navbar-nav">
                     <div class="d-flex flex-column align-items-center mt-3">
                         <div>
-                            <img class="rounded-circle" src="{{ user.profile.profile_image.url }}"
-                                alt="profile-image" style="width: 80px;">
+                            {% if mymodel_instance.image %}
+                                <img class="rounded-circle" src="{{ user.profile.profile_image.url }}"
+                                alt="profile-image" style="width: 80px; height: 80px;">
+                            {% else %}
+                                <img class="rounded-circle" src="{% static 'avatar.jpg' %}" 
+                                alt="Default Image" style="width: 80px; height: 80px;">
+                            {% endif %}
                         </div>
                         <span>@{{ user.username }}</span>
                     </div>
