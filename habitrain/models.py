@@ -10,7 +10,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=100, null=True, blank=True)
     occupation = models.CharField(max_length=100, null=True, blank=True)
     bio = models.TextField(max_length=500, null=True, blank=True)
-    profile_image = CloudinaryField('image', default='avatar.jpg')
+    profile_image = CloudinaryField('image')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
