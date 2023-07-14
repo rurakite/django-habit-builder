@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-X_FFRAME_OPTIONS = 'SAMEORIGIN'
+# X_FFRAME_OPTIONS = 'SAMEORIGIN'
 
 
 ALLOWED_HOSTS = ['8000-rurakite-djangohabitbui-holjobz1krc.ws-eu101.gitpod.io', 'habitrain-923cabcbe865.herokuapp.com']
