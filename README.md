@@ -213,3 +213,161 @@ The favicon was added to enhances the user experience by providing a recognizabl
 - Table Navigation
 - Social Authentication 
 - Habits Reminders
+
+## Technolgies
+
+- HTML
+  - The website's structure was carefully crafted using HTML, which served as the fundamental language for organizing and defining its elements. 
+- Bootstrap
+  - With Bootstrap's responsive features, the website seamlessly adapted to various screen sizes and devices, offering an optimal user experience.  
+- Bootswatch
+  - Bootswatch was utilized to create this website, and the Morph theme was specifically chosen to enhance the overall visual aesthetics and user experience.
+- CSS
+  - Some custom CSS style rules were added to achieve the application design idea.
+- HTMX
+  - HTMX was employed in the development of the application. With HTMX, dynamic and interactive features were implemented, enabling seamless communication between the client and server. By harnessing the power of HTMX, the application offers a responsive and interactive interface, enhancing usability and interactivity for users.
+- JavaScript
+  - JavaScript was used for :
+    * Modal Interaction
+    * Toast Notifications
+    * Weather Widget Integration
+    * Updating Habit Progress
+    * Calculating and Updating Progress Bar
+    * Adding Icon for Empty Cells in Table
+- Python
+  - Python was the main programming language used for the application using the Django Framework.
+- Chart.js
+  - A JavaScript library, was integrated into the application to visualize and present statistics in a user-friendly manner, allowing users to gain insights and track their progress effectively.
+- Cloudinary
+  - Cloudinary handles the upload and storage of user avatars and static files of a project.
+- Gitpod
+  - The website was developed using Gitpod what is obviously the VS Code IDE.
+- GitHub
+  - Source code is hosted on GitHub
+- Git
+  - Used to commit and push code during the development of the Website
+- Bootstrap Icons
+  - This was used for various icons throughout the site
+
+## Manual Testing
+<hr>
+
+**Authentication**
+<hr>
+
+- User Registration:
+1. Navigate to the [HABITRAIN](https://habitrain-923cabcbe865.herokuapp.com/) and click "hop on board" button.
+2. Enter a valid email address, username, password and password confirmation.
+3. Click the submit button
+
+Expected:
+
+User is redirected to the login page.
+ 
+Actual:
+
+User is redirected to the login page.
+<hr>
+
+- User Login:
+1. Navigate to the [HABITRAIN](https://habitrain-923cabcbe865.herokuapp.com/login/) login page.
+2. Enter username and password.
+3. Click the submit button
+
+Expected:
+
+User is successfully logged in and redirected to the dashboard.
+ 
+Actual:
+
+User is successfully logged in and redirected to the dashboard.
+<hr>
+
+- User Logout:
+1. While logged in, click the "LogOut" button.
+2. On the popped-up up window click "LogOut" button again to confirm your action.
+
+Expected:
+
+User is successfully logged out and redirected to the homepage.
+ 
+Actual:
+
+User is successfully logged out and redirected to the homepage.
+<hr>
+
+**User Dashboard**
+<hr>
+
+- View Dashboard:
+
+Expected:
+
+User see the dashboard with sidebar, animated quote card, weather widget, table with current day, date, week number and "plus" button in the header and a message saying that there are no habits at the moment and the "add new habit" button in the table body.
+
+Actual:
+
+User see the dashboard with sidebar, animated quote card, weather widget, table with current day, date, week number and "plus" button in the header and a message saying that there are no habits at the moment and the "add new habit" button in the table body.
+<hr>
+
+- Create Habit:
+
+1. Click the "plus" button on the table header.
+2. In popped-up window do following:
+    * Type Title
+    * Type Description
+    * Choose one of provided categories
+    * Set up the start date
+    * Set up the end date
+    * Click the "Save" button.
+
+Expected:
+
+Habit is successfully created and appears in the user's dashboard table.
+
+Actual:
+
+Habit is successfully created and appears in the user's dashboard table.
+<hr>
+
+- Edit Habit:
+
+1. Click the "Edit" button on the right hand side of the table against specific habit.
+2. Modify any desired fields of the habit (title, description, category, start and end dates).
+3. Click the "Save" button.
+
+Expected:
+
+Habit is successfully updated with the new information.
+
+Actual:
+
+Habit is successfully updated with the new information.
+<hr>
+
+- Delete Habit:
+
+1. Click the "Edit" button on the right hand side of the table against specific habit.
+2. In popped-up window click the "Delete" button.
+
+Expected:
+
+Habit is successfully deleted and no longer appears in the user's table.
+
+Actual:
+
+Habit is successfully deleted and no longer appears in the user's table.
+<hr>
+
+- Mark Daily Done:
+
+1. On the dashboard table locate a habit you want to track.
+2. Click on the checkbox corresponding to a specific date.
+
+Expected:
+
+The checkbox changed the color to green and the progress bar extended.
+
+Actual:
+
+The checkbox changed the color to green and the progress bar extended.
