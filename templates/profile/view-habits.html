@@ -2,7 +2,7 @@
 
 {% block content %}
     {% include 'components/dashboard-nav.html' %}
-    <main class="mt-5 pt-3">
+    <main class="mt-5 mb-3 pt-3">
         <div class="container-fluid">
             <div class="row" hx-get="{% url 'view-habits-cards' %}" hx-trigger="load, HabitListChanged from:body" hx-target="this">
                 
