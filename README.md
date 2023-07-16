@@ -371,3 +371,197 @@ The checkbox changed the color to green and the progress bar extended.
 Actual:
 
 The checkbox changed the color to green and the progress bar extended.
+<hr>
+
+**User Profile**
+<hr>
+
+- View User Profile:
+
+1. Click the "Profile" link on the side-bar navigation.
+
+Expected:
+
+Profile page displays the user's information and avatar correctly.
+
+Actual:
+
+Profile page displays the user's information and avatar correctly.
+<hr>
+
+- Update User Profile:
+
+1. Click the "Edit" button on the right hand side of Profile Information header.
+2. In the new window modify any desired fields of the form(name, email, age, location, bio) and upload a new picture.
+3. Click the "Update" button.
+
+Expected:
+
+User's profile is successfully updated with the new information.
+
+Actual:
+
+User's profile is successfully updated with the new information.
+<hr>
+
+**View Habits**
+<hr>
+
+- View Habits:
+1. Click the "View Habits" link on the side-bar navigation.
+
+Expected:
+
+View Habits page displays the grid with user's habits cards. 
+
+Actual:
+
+View Habits page displays the grid with user's habits cards.
+<hr>
+
+- Edit Habit:
+
+1. Click the gear icon on the left hand side of the habit card footer.
+2. Modify any desired fields of the habit (title, description, category, start and end dates).
+3. Click the "Save" button.
+
+Expected: 
+
+Habit is successfully updated with the new information.
+
+Actual:
+
+Habit is successfully updated with the new information.
+<hr>
+
+- View Daily Records:
+
+1. Click the "Daily Records" button on the right hand side of a habit's card footer.
+
+Expected:
+
+The popped-up window appears the table with the date and the status of a daily record for a specific habit.
+
+Actual:
+
+The popped-up window appears the table with the date and the status of a daily record for a specific habit.
+<hr>
+
+**Statistics**
+<hr>
+
+- View Statistics:
+
+1. Click the "Statistics" link on the side-bar navigation.
+
+Expected:
+
+The page displays relevant statistics, such as total habits, performance and remained based on the selected date.
+
+Actual:
+
+The date picker does not provide any default date and giving the alert that the date is "None".
+<hr>
+
+- View Statistics for a specific date.
+1. Click the date picker placeholder.
+2. From dropped-down calendar pick a date.
+
+Expected:
+
+The page displays relevant statistics for a specific date chosen, such as total habits, performance and remained based on the selected date.
+
+Actual:
+
+The page displays relevant statistics for a specific date chosen, such as total habits, performance and remained based on the selected date.
+<hr>
+
+**Navigation Links**
+
+- Home -> Navigate to the homepage of the website.
+- Register -> Go to the registration page to create a new user account.
+- Login -> Access the login page to authenticate and log in to the website.
+- Dashboard -> View the user dashboard, which provides an overview of habits and progress.
+- View Habits -> View habits in a card-based layout for a visual representation.
+- Statistics -> Access the statistics page to view habit-related data and insights.
+- Profile -> View and manage the user's profile information.
+- Log Out -> View a confirmation message for log out.
+
+All navigation links directed to the correct pages as expected.
+<hr>
+
+**Responsiveness**
+
+- Desktop Testing:
+
+    - The website was opened on a desktop computer with a 26'' screen size.
+    - The layout, text, and images are properly aligned and displayed. 
+    - The window was resized to smaller and larger sizes, and checked if the website adapts smoothly without any visual glitches or overlapping elements.
+    - The navigation menu was tested, it was remained accessible and functional at different window widths.
+
+All features, buttons, and forms confirmed their responsiveness.
+<hr>
+
+- Tablet Testing:
+
+    - The website was opened on a tablet device in both portrait and landscape orientations.
+    - The content is displayed properly and fits the screen dimensions.
+  
+All elements confirmed their responsiveness. 
+<hr>
+
+- Mobile Testing:
+
+    - The website on few mobile devices with various screen sizes and resolutions.
+    - The website tested in both portrait and landscape orientations.
+
+All elements confirmed their responsiveness. 
+<hr>
+
+- Cross-Browser Testing:
+
+  - The website was tested on different web browsers like Google Chrome, Mozilla Firefox, Microsoft Edge, and Safari.
+<hr>
+
+### Heroku Deployment
+
+The site was deployed to Heroku. The steps to deploy are as follows:
+
+- Navigate to heroku and create an account
+  - Click the new button in the top right corner
+  - Select create new app
+  - Enter app name
+  - Select region and click create app
+- Navigate to [elephantsql](https://www.elephantsql.com/) and create an account
+  - Click on "Create New Instance"
+  - Choose the "Tiny Turtle" plan
+  - Select EU region
+  - Click "Review"
+  - Click "Create Instance"
+- Navigate to [Cloudinary](https://cloudinary.com/)
+    - Create an account
+    - From dashboard copy the API Environment variable
+    - Configure static and media in your settings.py file
+- In the project root folder create env.py file
+    - Add the following config vars:
+      * SECRET_KEY: (Your secret key)
+      * CLOUDINARY_URL: (copy the url from [Cloudinary](https://cloudinary.com/))
+      * DATABASE_URL: (copy the url from [elephantsql](https://www.elephantsql.com/) )
+- In heroku go to the settings tab and then click reveal config vars
+- Add the following config vars:
+  - SECRET_KEY: (Your secret key)
+  - DATABASE_URL: (This should already exist with add on of postgres)
+
+- Click the deploy tab
+- Scroll down to Connect to GitHub and sign in / authorize when prompted
+- In the search box, find the repositoy you want to deploy and click connect
+- Scroll down to Manual deploy and choose the main branch
+- Click deploy
+
+The app should now be deployed.
+
+The live link can be found here: [HABITRAIN](https://habitrain-923cabcbe865.herokuapp.com/)
+
+### Credits
+
+- All pictures were getting from [Freepik website](https://www.freepik.com/)
